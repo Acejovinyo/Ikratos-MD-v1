@@ -270,7 +270,7 @@ export async function handler(chatUpdate) {
                 if (!('isBanned' in chat))
                     chat.isBanned = false
                 if (!('welcome' in chat))
-                    chat.welcome = true
+                    chat.welcome = false
                 if (!('gpt' in chat))
                     chat.gpt = false  
                 if (!('detect' in chat))
@@ -310,7 +310,7 @@ export async function handler(chatUpdate) {
             } else
                 global.db.data.chats[m.chat] = {
                     isBanned: false,
-                    welcome: true,
+                    welcome: false,
                     gpt: false,
                     detect: false,
                     sWelcome: '',
@@ -677,8 +677,8 @@ export async function participantsUpdate({ id, participants, action }) {
                 let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata
                 for (let user of participants) {
                     let nickgc = await conn.getName(id)
-                    let pp = 'https://telegra.ph/file/24fa902ead26340f3df2c.png'
-                    let ppgc = 'https://telegra.ph/file/24fa902ead26340f3df2c.png'
+                    let pp = 'https://telegra.ph/file/ddd749e23cd1a0a220129.jpg'
+                    let ppgc = 'https://telegra.ph/file/ddd749e23cd1a0a220129.jpg'
                     try {
                         pp = await this.profilePictureUrl(user, 'image')
                         ppgc = await this.profilePictureUrl(id, 'image') 
@@ -690,7 +690,7 @@ export async function participantsUpdate({ id, participants, action }) {
                             let wel = await new knights.Welcome2()
                  .setAvatar(pp)
                  .setUsername(this.getName(user)) 
-                 .setBg("https://telegra.ph/file/0b814069d86ee9a022da5.jpg")
+                 .setBg("https://telegra.ph/file/01fcf9c53a50649ac94eb.jpg")
                  .setGroupname(groupMetadata.subject) 
                  .setMember(groupMetadata.participants.length)
                  .toAttachment()
@@ -701,7 +701,7 @@ export async function participantsUpdate({ id, participants, action }) {
                 .setGuildIcon(ppgc)
                 .setMemberCount(groupMetadata.participants.length)
                 .setAvatar(pp)
-                .setBackground("https://telegra.ph/file/0db212539fe8a014017e3.jpg")
+                .setBackground("https://telegra.ph/file/baa8c88ff3e56ceceb7da.jpg")
                 .toAttachment()
                             
                          this.sendFile(id, text2, pp, 'pp.jpg', text, null, false, { mentions: [user] })
@@ -722,10 +722,10 @@ export async function participantsUpdate({ id, participants, action }) {
             }
             break
         case 'promote':
-            text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
+            text = (chat.sPromote || this.spromote || conn.spromote || '```This Guy``` @user ```is now an Admin of this Group♥️😌```')
         case 'demote':
             if (!text)
-                text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```is no longer Admin```')
+                text = (chat.sDemote || this.sdemote || conn.sdemote || '```This Guy``` @user ```is no longer an Admin of this Group🗿```')
             text = text.replace('@user', '@' + participants[0].split('@')[0])
             if (chat.detect)
                 this.sendMessage(id, { text, mentions: this.parseMention(text) })
